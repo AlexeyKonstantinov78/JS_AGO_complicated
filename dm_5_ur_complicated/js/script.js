@@ -3,7 +3,6 @@
 let arr = ['254', '567', '323', '5', '4', '321', '456'];
 
 for(let i = 0; i < arr.length; i++) {
-    console.log(typeof arr[i]);
     let str = Number(arr[i].substring(0, 1));
     if (str === 2 || str === 4) console.log(arr[i]);
 }
