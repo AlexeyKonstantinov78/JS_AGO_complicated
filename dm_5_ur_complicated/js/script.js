@@ -1,9 +1,10 @@
 'use strict';
 
-let arr = [254, 567, 323, 5, 4, 321, 456];
+let arr = ['254', '567', '323', '5', '4', '321', '456'];
 
 for(let i = 0; i < arr.length; i++) {
-    let str = Number(String(arr[i]).substring(0, 1));
+    console.log(typeof arr[i]);
+    let str = Number(arr[i].substring(0, 1));
     if (str === 2 || str === 4) console.log(arr[i]);
 }
 
