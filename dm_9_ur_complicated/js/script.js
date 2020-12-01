@@ -24,6 +24,13 @@ let week = ['Воскресенье', 'Понедельник', 'Вторник'
     document.write('Сегодня ' + week[day] + ', ' + timeNow.getDate() + ' ' + monthAll[month] + ' ' + timeNow.getFullYear() + ' года, ' + timeNow.getHours() + ' ' + declOfNum(timeNow.getHours()) + ' ' +timeNow.getMinutes()+" минут "+timeNow.getSeconds() + ' секунд' + '<br>');
 
     document.write(decZero(timeNow.getDate()) + ' ' + decZero(timeNow.getMonth()) + ' ' + decZero(timeNow.getFullYear()) + ' - ' + decZero(timeNow.getHours()) +" : "+ decZero(timeNow.getMinutes()) + " : " + decZero(timeNow.getSeconds()) + '<br>');
+    
 
+    // document.removeChild;
 }, 1000);
 
+setTimeout(() => {
+    clearInterval(time);
+    document.write('Stop');
+    
+}, 10000);
