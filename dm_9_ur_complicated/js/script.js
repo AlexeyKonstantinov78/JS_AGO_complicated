@@ -33,4 +33,4 @@ setTimeout(() => {
     clearInterval(time);
     document.write('Stop');
     
-}, 10000);
+}, 60000);
