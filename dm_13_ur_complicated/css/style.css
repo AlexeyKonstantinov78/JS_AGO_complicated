@@ -1,0 +1,28 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;    
+    background-color: #008d3b;
+}
+
+h1{
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: white;
+}
+
+.wrapper {
+    text-align: center;
+    font-size: 30px;
+    
+    height: 100%;
+}
+
+#change{
+    padding: 20px 40px;
+    font-size: 30px;
+    background-color: white;
+    border: 1px solid white;
+    color: #008d3b;
+}
