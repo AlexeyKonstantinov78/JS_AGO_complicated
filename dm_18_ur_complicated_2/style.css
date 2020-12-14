@@ -1,0 +1,18 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbipbap.ru%2Fwp-content%2Fuploads%2F2017%2F04%2Fkrasivye-kartinki-Priroda-2278640.jpeg&f=1&nofb=1');
+    background-size: cover;
+    
+}
+
+div{
+    position: relative;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
