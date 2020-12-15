@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
     }
 
-    countTimer('31 december 2020');
+    countTimer('15 december 2020');
     
     //menu
     const toggleMenu = () => {
@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded', function(){
         const btnMenu = document.querySelector('.menu'),
             menu = document.querySelector('menu'),
             closeBtn = document.querySelector('.close-btn'),
-            menuItems = menu.querySelectorAll('ul>li');
+            menuItems = menu.querySelectorAll('ul>li>a');
 
         const handlerMenu = () => {
             menu.classList.toggle('active-menu');
@@ -66,7 +66,12 @@ window.addEventListener('DOMContentLoaded', function(){
             handlerMenu();
         });
         // eslint-disable-next-line arrow-parens
-        menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+        menuItems.forEach((elem) => elem.addEventListener('click', (e) => {
+            handlerMenu();
+            e.preventDefault();
+            const blockID = elem.getAttribute('href').substr(1);
+            document.getElementById(blockID).scrollIntoView({block: 'start', behavior: 'smooth'});
+        }));
 
     };
 
