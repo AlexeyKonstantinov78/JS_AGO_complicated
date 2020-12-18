@@ -137,7 +137,6 @@ body {
     margin: 0 0 10px 0;
     padding: 14px 100px 14px 14px;
     word-break: break-word;
-    
 }
 
 .todo-item:last-of-type {
@@ -237,12 +236,3 @@ body {
   transition: opacity 0.5s, visibility 0s linear 0.5s;
 }
 
-.return-item-do{
-    opacity: 0;
-} 
-
-.return-item{
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 1.0s;
-}

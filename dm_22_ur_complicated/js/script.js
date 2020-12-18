@@ -29,9 +29,6 @@ class Todo {
         const li = document.createElement('li');
         li.classList.add('todo-item');
         li.key = todo.key;
-        if (todo.completed) {
-            li.classList.add('return-item-do')
-        };
         li.insertAdjacentHTML('beforeend', `
             <span class="text-todo">${todo.value}</span>
             <div class="todo-buttons" id='${li.key}'>
@@ -44,6 +41,41 @@ class Todo {
         } else {
             this.todoList.append(li);
         }
+    }
+
+    anime(clon, key) {
+        //if (document.querySelector('.todo-completed> .todo-item') !== null) {
+            let count = 0;
+            console.log(clon);
+            console.log(key);
+
+            requestAnimationFrame(function opac() {
+                count++;
+
+                clon.closest('.todo-item').style.opacity = count / 100;
+
+                if (count < 100) {
+                    setTimeout(opac, 2);
+                }
+            });
+            
+            this.todoData.forEach((val, keyMap) => {
+                if (key === keyMap) {
+                    if (val.completed) {
+                        this.todoCompleted.append(clon); 
+                                            //console.log(val.completed);
+                    } else {
+                        this.todoList.append(clon);
+                    }
+                }
+            });
+
+            setTimeout(() => {
+                console.log(this);
+                this.render();
+            }, 500);
+            
+        //}
     }
 
     addTodo(e) {
@@ -78,25 +110,23 @@ class Todo {
     }
 
     completedItem(key, target) {
-        //console.log(target.closest('.todo-item'));
+        let clon = target.closest('.todo-item').cloneNode(true);
+        
         target.closest('.todo-item').classList.add('delete');
         let _this = this;
         setTimeout(function(){
             _this.todoData.forEach((val, keyMap) => {
-                if (key === keyMap) val.completed = true;
-            })
+                if (key === keyMap) {
+                    if (val.completed !== true) {
+                        val.completed = true;
+                    } else {val.completed = false;}
+                }
+            });
             _this.addToStorage();
-            _this.render();
-            //console.log(target.closest('.todo-item'));
-
-            document.querySelector('.todo-completed> .todo-item').classList.remove('return-item-do');
-            document.querySelector('.todo-completed> .todo-item').classList.add('return-item');
-            //document.querySelector('.return-item-do').classList.remove('return-item-do'); 
-
+            
+            _this.anime(clon, key);
+            //_this.render();
         }, 500);
-        
-        // target.closest('.todo-item').classList.remove('return-item-do');
-        // target.closest('.todo-item').classList.add('return-item');
     }
 
     editItem(key) {
@@ -112,7 +142,7 @@ class Todo {
     handler() {
         document.querySelector('.todo-container').addEventListener('click', (event) => {
             let target = event.target;
-           // console.log(target);
+           //console.log(target.closest('.todo-item'));
             if (target.matches('.todo-remove')) this.deleteItem(target.parentNode.id, target);
             if (target.matches('.todo-complete')) this.completedItem(target.parentNode.id, target);
             if (target.matches('.todo-edit')) this.editItem(target.parentNode.id);
