@@ -18,6 +18,10 @@ class Todo {
         this.todoList.textContent = ''; 
         this.todoCompleted.textContent = ''; 
         this.todoData.forEach(this.createItem, this);
+        let todoEdit = document.querySelectorAll('.todo-completed>.todo-item>.todo-buttons>.todo-edit');
+        todoEdit.forEach((item) => {
+            item.style.display = 'none';
+        });
         this.addToStorage();
     }
 
@@ -25,9 +29,13 @@ class Todo {
         const li = document.createElement('li');
         li.classList.add('todo-item');
         li.key = todo.key;
+        if (todo.completed) {
+            li.classList.add('return-item-do')
+        };
         li.insertAdjacentHTML('beforeend', `
             <span class="text-todo">${todo.value}</span>
             <div class="todo-buttons" id='${li.key}'>
+                <button class="todo-edit"></button>
                 <button class="todo-remove"></button>
                 <button class="todo-complete"></button>
             </div>`);
@@ -57,17 +65,44 @@ class Todo {
         return Math.random().toString(8).substring(2, 7) + Math.random().toString(8).substring(2, 7);
     }
 
-    deleteItem(key) {
-        this.todoData.forEach((value, i) => {
-            if (key === i) this.todoData.delete(i);
-        });
-        this.addToStorage();
-        this.render();
+    deleteItem(key, target) {
+        target.closest('.todo-item').classList.add('delete');
+        let _this = this;
+        setTimeout(function() {
+            _this.todoData.forEach((value, i) => {
+                    if (key === i) _this.todoData.delete(i);
+            });
+            _this.addToStorage();
+            _this.render();
+        }, 500);
     }
 
-    completedItem(key) {
+    completedItem(key, target) {
+        //console.log(target.closest('.todo-item'));
+        target.closest('.todo-item').classList.add('delete');
+        let _this = this;
+        setTimeout(function(){
+            _this.todoData.forEach((val, keyMap) => {
+                if (key === keyMap) val.completed = true;
+            })
+            _this.addToStorage();
+            _this.render();
+            //console.log(target.closest('.todo-item'));
+
+            document.querySelector('.todo-completed> .todo-item').classList.remove('return-item-do');
+            document.querySelector('.todo-completed> .todo-item').classList.add('return-item');
+            //document.querySelector('.return-item-do').classList.remove('return-item-do'); 
+
+        }, 500);
+        
+        // target.closest('.todo-item').classList.remove('return-item-do');
+        // target.closest('.todo-item').classList.add('return-item');
+    }
+
+    editItem(key) {
+        let inputButton = prompt('Введите скорректированное значение');
         this.todoData.forEach((val, keyMap) => {
-            if (key === keyMap) val.completed = true;
+            if (key === keyMap) val.value = inputButton;
         })
         this.addToStorage();
         this.render();
@@ -77,8 +112,10 @@ class Todo {
     handler() {
         document.querySelector('.todo-container').addEventListener('click', (event) => {
             let target = event.target;
-            if (target.matches('.todo-remove')) this.deleteItem(target.parentNode.id);
-            if (target.matches('.todo-complete')) this.completedItem(target.parentNode.id);
+           // console.log(target);
+            if (target.matches('.todo-remove')) this.deleteItem(target.parentNode.id, target);
+            if (target.matches('.todo-complete')) this.completedItem(target.parentNode.id, target);
+            if (target.matches('.todo-edit')) this.editItem(target.parentNode.id);
         });
     }
 
