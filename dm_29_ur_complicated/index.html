@@ -7,17 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div>
+        <select id="valuta">
+            <option value="no">Выбирете валюту</option>
+        </select>    
+    </div>
     <div id="conteyners">
-        <div>
-            <select id="valuta">
-                <option value="no">Выбирете валюту</option>
-            </select>    
+        <div id="konv1">
+            <div >
+                <input type="text" id="item"><span id="itemName">Валюта</span>
+                <input type="text" id="konvert-valuta" disabled><span>Рубли</span>
+            </div>
+            <button>Конвертировать</button>
         </div>
-        <div >
-            <input type="text" id="item"><span>Валюта</span>
-            <input type="text" id="konvert-valuta" disabled><span>Рубли</span>
+        <div  id="konv2">
+            <div>
+                <input type="text" id="item"><span>Рубли</span>
+                <input type="text" id="konvert-valuta" disabled><span id="itemName">Валюта</span>
+            </div>
+            <button>Конвертировать</button>
         </div>
-        <button>Конвертировать</button>
     </div>
 </body>
     <script src="script.js"></script>

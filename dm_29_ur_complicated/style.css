@@ -4,6 +4,7 @@ html, body{
 }
 
 div{
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -12,9 +13,15 @@ input{
 
 }
 
+button{
+    margin-bottom: 10px;
+}
+
 #conteyners{
     width: 600px;
     background-color: bisque;
     padding: 10px 10px;
 }
-
+#konv2>#konvert-valuta{
+    margin-left: 20px;
+}

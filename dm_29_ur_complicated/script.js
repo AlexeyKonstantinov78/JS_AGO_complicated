@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const valuta = document.getElementById('valuta'),
-        inputItem = document.getElementById('item'),
+        inputItem = document.querySelectorAll('#item'),
         inputKonvertValuta = document.getElementById('konvert-valuta'),
-        buttom = document.querySelector('button'),
+        buttom = document.querySelectorAll('button'),
         latestForeign = {};
 
     const getData = () => {
@@ -24,18 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch((error) => console.error(error));
     };
 
-    inputItem.addEventListener('input', () => {
-        inputItem.value = inputItem.value.replace(/[^.0-9]/g, '');
+    inputItem.forEach((item) => {
+        item.addEventListener('input', () => {
+            item.value = item.value.replace(/[^.0-9]/g, '');
+        });
     });
 
     valuta.addEventListener('change', () => {
-        buttom.addEventListener('click', () => {
-            if (inputItem.value !== '') {
-                inputKonvertValuta.value = +(inputItem.value / valuta.value).toFixed(2);
-            }
+        document.querySelectorAll('#itemName').forEach((itemName) => {
+            itemName.textContent = `Валюта ${valuta[valuta.selectedIndex].id}`;
         });
 
+        document.getElementById('conteyners').addEventListener('click', (event) => {
+            let target = event.target
+            if (target.parentNode.id === 'konv1') {
+                document.getElementById(target.parentNode.id).querySelector('#konvert-valuta').value = +(document.getElementById(target.parentNode.id).querySelector('#item').value / valuta.value).toFixed(2);
+            }
+            if (target.parentNode.id === 'konv2') {
+                document.getElementById(target.parentNode.id).querySelector('#konvert-valuta').value = +(document.getElementById(target.parentNode.id).querySelector('#item').value * valuta.value).toFixed(2);
+            }
+
+        });
     });
+
+
 
     getData();
 });
